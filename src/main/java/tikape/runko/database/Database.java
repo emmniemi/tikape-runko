@@ -38,11 +38,21 @@ public class Database {
     private List<String> sqliteLauseet() {
         ArrayList<String> lista = new ArrayList<>();
 
-        // tietokantataulujen luomiseen tarvittavat komennot suoritusjärjestyksessä
-        lista.add("CREATE TABLE Opiskelija (id integer PRIMARY KEY, nimi varchar(255));");
-        lista.add("INSERT INTO Opiskelija (nimi) VALUES ('Platon');");
-        lista.add("INSERT INTO Opiskelija (nimi) VALUES ('Aristoteles');");
-        lista.add("INSERT INTO Opiskelija (nimi) VALUES ('Homeros');");
+//         tietokantataulujen luomiseen tarvittavat komennot suoritusjärjestyksessä
+//        lista.add("DROP TABLE Aihealue; DROP TABLE Viestiketju; DROP TABLE Viesti;");
+//        lista.add("CREATE TABLE Aihealue (id INTEGER PRIMARY KEY, aiheenNimi VARCHAR(100));");
+//        lista.add("CREATE TABLE Viestiketju (id INTEGER PRIMARY KEY, aihealue INTEGER, "
+//                + "nimi VARCHAR(100), aika TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL, FOREIGN KEY (aihealue) REFERENCES Aihealue(id));");
+//        lista.add("CREATE TABLE Viesti (id INTEGER, viestiketju INTEGER, teksti VARCHAR(500), lahettaja VARCHAR(50), "
+//                + "lahetysaika TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,"
+//                + " otsikko VARCHAR(100), FOREIGN KEY (viestiketju) REFERENCES Viestiketju(id));");
+//        lista.add("INSERT INTO Aihealue (aiheenNimi) VALUES ('Tietokannat');");
+//        lista.add("INSERT INTO Aihealue (aiheenNimi) VALUES ('Kukkaset ja mehiläiset');");
+//
+//        lista.add("INSERT INTO Viestiketju (aihealue, nimi) VALUES (1, 'TiKaPe');");
+//        lista.add("INSERT INTO Viestiketju (aihealue, nimi) VALUES (1, 'TiKaPe2');");
+//        lista.add("INSERT INTO Viestiketju (aihealue, nimi) VALUES (1, 'TiKaPe3');");
+//        lista.add("INSERT INTO Viesti (viestiketju, teksti, lahettaja, otsikko) VALUES (1, 'Jee', 'Homeros taas kerran', 'Moi:)');");
 
         return lista;
     }

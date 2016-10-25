@@ -4,36 +4,78 @@ import java.util.HashMap;
 import spark.ModelAndView;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
-import tikape.runko.database.Database;
-import tikape.runko.database.OpiskelijaDao;
+import tikape.runko.database.*;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        Database database = new Database("jdbc:sqlite:opiskelijat.db");
+        Database database = new Database("jdbc:sqlite:keskustelupalsta.db");
         database.init();
 
-        OpiskelijaDao opiskelijaDao = new OpiskelijaDao(database);
-
+        ViestiDao viestiDao = new ViestiDao(database);
+        AihealueDao aihealueDao = new AihealueDao(database);
+        ViestiketjuDao viestiketjuDao = new ViestiketjuDao(database);
+        
+      
         get("/", (req, res) -> {
+            res.redirect("/aihealueet");
+            return "ok";
+        });
+        
+        get("/aihealueet", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("viesti", "tervehdys");
+            map.put("aihealueet", aihealueDao.findAll());
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
-
-        get("/opiskelijat", (req, res) -> {
+        
+        
+        get("/aihealueet/:id", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("opiskelijat", opiskelijaDao.findAll());
+            
+            map.put("aihealuetunnus", req.params(":id"));
+            
+            map.put("aihealueennimi", aihealueDao.haeAiheenNimi(Integer.parseInt(req.params(":id"))));
+            map.put("viestiketjut", aihealueDao.haeViestiketjut(Integer.parseInt(req.params("id"))));
+            
 
-            return new ModelAndView(map, "opiskelijat");
+            return new ModelAndView(map, "viestiketjut");
         }, new ThymeleafTemplateEngine());
-
-        get("/opiskelijat/:id", (req, res) -> {
+        
+        get("/aihealueet/:aid/:id", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("opiskelija", opiskelijaDao.findOne(Integer.parseInt(req.params("id"))));
-
-            return new ModelAndView(map, "opiskelija");
+            
+            
+            map.put("aihealueennimi", aihealueDao.haeAiheenNimi(Integer.parseInt(req.params(":aid"))));
+            map.put("viestiketjunnimi", viestiketjuDao.haeViestiketjunNimi(Integer.parseInt(req.params(":id"))));
+            
+            
+            map.put("viestit", viestiketjuDao.haeViestit(Integer.parseInt(req.params("id"))));
+            map.put("aihealuetunnus", req.params(":aid"));
+            map.put("viestiketjutunnus", req.params(":id"));
+            
+            return new ModelAndView(map, "viestit");
         }, new ThymeleafTemplateEngine());
+        
+        post("/aihealueet/:aid/:id", (req, res) -> {
+            viestiDao.lisaaViesti(Integer.parseInt(req.params(":id")), req.queryParams("otsikko"), req.queryParams("lahettaja"),
+                    req.queryParams("teksti"));
+            res.redirect("/aihealueet/" + req.params(":aid") + "/" + req.params(":id"));
+            return "ok";
+        });
+        
+        post("/aihealueet", (req, res) -> {
+            aihealueDao.lisaaAihealue(req.queryParams("aiheenNimi"));
+            res.redirect("/aihealueet");
+            return "ok";
+        });
+        
+        post("/aihealueet/:aid", (req, res) -> {
+            viestiketjuDao.lisaaViestiketju(Integer.parseInt(req.params(":aid")), req.queryParams("nimi"));
+            res.redirect("/aihealueet/" + req.params(":aid"));
+            return "ok";
+        });
+        
+
     }
 }

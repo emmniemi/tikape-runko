@@ -4,7 +4,7 @@
     <head>
         <title>Foorumi</title>
         <meta charset="utf-8" />
-          <link th:href="@{https://fonts.googleapis.com/css?family=Cabin|Kaushan+Script|Lobster|Oswald|Roboto|Lora}" rel='stylesheet' type='text/css' />
+                  <link th:href="@{https://fonts.googleapis.com/css?family=Cabin|Kaushan+Script|Lobster|Oswald|Roboto|Lora}" rel='stylesheet' type='text/css' />
         <style>
             body {
                 background-color: #f3f3f3;
@@ -64,41 +64,56 @@
 
     <body>
         <center>
-        
-            <div id="wrapper">
-            
-            
-        <h1>Sivistynyt keskustelupasta</h1>
-        <hr/>
-        <h2>Aihealueet</h2>
-        
+                        <div id="wrapper">
+<!--            EI TOIMI! Tarttis tehdä jotain-->
+            <!--<img src="/foorumikuva.jpg" alt=""/>-->
 
-        <ul>
-            <li th:each="aihealue: ${aihealueet}">
-                <a th:href="@{~/aihealueet/{aid}(aid=${aihealue.id})}" 
-                   th:text="${aihealue.aiheenNimi}">Aihealue</a>
-            </li>
-        </ul>
+            <h1>Sivistynyt keskustelupasta</h1>
+            <hr/>
+
+            <h3>Aihealue: <span th:text="${aihealueennimi}"/> </h3>
+            <h2 th:text="${viestiketjunnimi}"> </h2>      
+
         
+        <table width="600px"> 
+            <tr th:each="viesti: ${viestit}">
+                <td width="100px" th:text="${viesti.getOtsikko()}">teksti</td>
+                <td width="100px" th:text="${viesti.getLahettaja()}">teksti2</td>
+                <td width="400px" th:text="${viesti.getTeksti()}">teksti3</td>
+            </tr>
+        </table>  
+        
+        <br/>
+        <br/>
         <hr/>
+        <h3>Kirjoita viestiketjuun uusi viesti</h3>
         
-        <h3>Lisää uusi aihealue</h3>
         
-        <form th:action="@{~/aihealueet}" method="POST">
+        <form th:action="@{~/aihealueet/{aid}/{id} (id=${viestiketjutunnus}, aid=${aihealuetunnus})}" method="POST">
             
             <table width="600px">
                 <tr>
-                    <td width="250px;">Aiheen nimi:</td>
-                    <td width="350px;"><input type="text" name="aiheenNimi" style="width: 350px;"/></td>
-                    <td><input type="submit"/></td>
+                    <td width="100px;">Otsikko:</td>
+                    <td width="500px;"><input type="text" name="otsikko" style="width: 500px;"/></td>
+                </tr>
+                <tr>
+                    <td width="100px;">Kirjoittaja:</td>
+                    <td width="500px;"><input type="text" name="lahettaja" style="width: 500px;"/></td>
+                </tr>   
+                <tr>
+                    <td width="100px;">Viesti:</td>
+                    <td width="500px;"><textarea name="teksti" style="height:200px; width:498px;text-align:top;"></textarea></td>
+                </tr>   
+                <tr>
+                    <td width="100px"> </td>
+                    <td width="500px"><input type="submit"/></td>
                 </tr>
             </table>
             
         </form>
-        
-        
-            </div>
-        
+
+                        </div>
         </center>
+
     </body>
 </html>

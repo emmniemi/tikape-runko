@@ -4,7 +4,7 @@
     <head>
         <title>Foorumi</title>
         <meta charset="utf-8" />
-          <link th:href="@{https://fonts.googleapis.com/css?family=Cabin|Kaushan+Script|Lobster|Oswald|Roboto|Lora}" rel='stylesheet' type='text/css' />
+                          <link th:href="@{https://fonts.googleapis.com/css?family=Cabin|Kaushan+Script|Lobster|Oswald|Roboto|Lora}" rel='stylesheet' type='text/css' />
         <style>
             body {
                 background-color: #f3f3f3;
@@ -64,41 +64,35 @@
 
     <body>
         <center>
-        
-            <div id="wrapper">
             
-            
+                        <div id="wrapper">
         <h1>Sivistynyt keskustelupasta</h1>
         <hr/>
-        <h2>Aihealueet</h2>
-        
+        <h3>Aihealue: <span th:text="${aihealueennimi}"/> </h3>
 
         <ul>
-            <li th:each="aihealue: ${aihealueet}">
-                <a th:href="@{~/aihealueet/{aid}(aid=${aihealue.id})}" 
-                   th:text="${aihealue.aiheenNimi}">Aihealue</a>
+            <li th:each="viestiketju: ${viestiketjut}">
+                <a  th:href="@{~/aihealueet/{aid}/{id}(aid=${viestiketju.aihealue},id=${viestiketju.id})}"
+                    th:text="${viestiketju.nimi}">Viestiketju</a>
             </li>
         </ul>
-        
         <hr/>
         
-        <h3>Lisää uusi aihealue</h3>
+        <h3>Lisää uusi viestiketju</h3>
         
-        <form th:action="@{~/aihealueet}" method="POST">
+        <form th:action="@{~/aihealueet/{aid}(aid=${aihealuetunnus})}" method="POST">
             
             <table width="600px">
                 <tr>
-                    <td width="250px;">Aiheen nimi:</td>
-                    <td width="350px;"><input type="text" name="aiheenNimi" style="width: 350px;"/></td>
+                    <td width="250px;">Viestiketjun nimi:</td>
+                    <td width="350px;"><input type="text" name="nimi" style="width: 350px;"/></td>
                     <td><input type="submit"/></td>
                 </tr>
             </table>
             
         </form>
-        
-        
-            </div>
-        
+                        </div>
         </center>
+
     </body>
 </html>
