@@ -8,9 +8,8 @@ public class Viesti {
     private Integer viestiketju;
     private String teksti;
     private String lahettaja;
-//    private Timestamp lahetysaika;
-    private String otsikko;
     private String lahetysaika;
+    private String otsikko;
 
     public Viesti(Integer id, Integer viestiketju, String teksti, String lahettaja, String lahetysaika, String otsikko) {
         this.id = id;
@@ -45,9 +44,9 @@ public class Viesti {
         return lahettaja;
     }
 
-//    public Timestamp getLahetysaika() {
-//        return lahetysaika;
-//    }
+    public String getLahetysaika() {
+        return lahetysaika;
+    }
 
     public String getOtsikko() {
         return otsikko;
@@ -61,9 +60,9 @@ public class Viesti {
         this.lahettaja = lahettaja;
     }
 
-//    public void setLahetysaika(Timestamp lahetysaika) {
-//        this.lahetysaika = lahetysaika;
-//    }
+    public void setLahetysaika(String lahetysaika) {
+        this.lahetysaika = lahetysaika;
+    }
 
     public void setOtsikko(String otsikko) {
         this.otsikko = otsikko;

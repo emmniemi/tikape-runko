@@ -69,13 +69,22 @@
         <h1>Sivistynyt keskustelupasta</h1>
         <hr/>
         <h3>Aihealue: <span th:text="${aihealueennimi}"/> </h3>
-
-        <ul>
-            <li th:each="viestiketju: ${viestiketjut}">
-                <a  th:href="@{~/aihealueet/{aid}/{id}(aid=${viestiketju.aihealue},id=${viestiketju.id})}"
-                    th:text="${viestiketju.nimi}">Viestiketju</a>
-            </li>
-        </ul>
+        
+        
+                <table width="600px"> 
+            <tr>
+                <td width="300px"><b>Viestiketjut</b></td>
+                <td width="300px"><b>Viestien lukumäärä</b></td>
+            </tr>
+            <tr th:each="viestiketju: ${viestiketjut}">
+                <td width="300px">
+                    <a th:href="@{~/aihealueet/{aid}/{id}(aid=${viestiketju.aihealue},id=${viestiketju.id})}" 
+                            th:text="${viestiketju.nimi}">Viestiketju</a></td>
+                <td width="300px" th:text="${viestienLukumaarat.get(viestiketju.id)}">teksti2</td>
+            </tr>
+        </table>  
+        
+        
         <hr/>
         
         <h3>Lisää uusi viestiketju</h3>

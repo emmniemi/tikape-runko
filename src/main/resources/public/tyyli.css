@@ -1,0 +1,13 @@
+body {
+    font-family: serif;
+    font-size: 14px;
+    line-height: 2em;
+    color: #434343;
+    background-color: #f3f3f3;
+}
+h1 {
+    font-family: 'Georgia';
+    font-weight: bold;
+    font-style: italic;
+    color: darkcyan;
+}

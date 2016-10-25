@@ -2,6 +2,7 @@ package tikape.runko;
 
 import java.util.HashMap;
 import spark.ModelAndView;
+import spark.Spark;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.*;
@@ -15,7 +16,7 @@ public class Main {
         
         Database database = new Database("jdbc:sqlite:keskustelupalsta.db");
         database.init();
-
+        Spark.staticFileLocation("public");
         ViestiDao viestiDao = new ViestiDao(database);
         AihealueDao aihealueDao = new AihealueDao(database);
         ViestiketjuDao viestiketjuDao = new ViestiketjuDao(database);
@@ -29,16 +30,31 @@ public class Main {
         get("/aihealueet", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("aihealueet", aihealueDao.findAll());
+            map.put("viestiketjujenLukumaarat", aihealueDao.haeViestiketjujenMaara());
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
+        
+        get("/viestihaku/hakusana", (req, res) -> {
+            HashMap map = new HashMap<>();
+            map.put("haetutViestit", viestiDao.haeHakusanalla(req.params("hakusana")));
+            
+            
+           return new ModelAndView(map, "viestihaku"); 
+        }, new ThymeleafTemplateEngine());
+        
+//        post("/aihealueet", (req, res) -> {
+//            viestiDao.haeHakusanalla("hakusana");
+//            res.redirect("/viestihaku/hakusana");
+//            return "ok";
+//        });
         
         
         get("/aihealueet/:id", (req, res) -> {
             HashMap map = new HashMap<>();
             
             map.put("aihealuetunnus", req.params(":id"));
-            
+            map.put("viestienLukumaarat", viestiketjuDao.haeViestienMaara(Integer.parseInt(req.params(":id"))));
             map.put("aihealueennimi", aihealueDao.haeAiheenNimi(Integer.parseInt(req.params(":id"))));
             map.put("viestiketjut", aihealueDao.haeViestiketjut(Integer.parseInt(req.params("id"))));
             
@@ -52,6 +68,7 @@ public class Main {
             
             map.put("aihealueennimi", aihealueDao.haeAiheenNimi(Integer.parseInt(req.params(":aid"))));
             map.put("viestiketjunnimi", viestiketjuDao.haeViestiketjunNimi(Integer.parseInt(req.params(":id"))));
+            
             
             
             map.put("viestit", viestiketjuDao.haeViestit(Integer.parseInt(req.params("id"))));
@@ -79,6 +96,8 @@ public class Main {
             res.redirect("/aihealueet/" + req.params(":aid"));
             return "ok";
         });
+        
+        
         
 
     }
