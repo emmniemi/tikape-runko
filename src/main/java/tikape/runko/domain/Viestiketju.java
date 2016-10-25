@@ -7,15 +7,11 @@ public class Viestiketju {
     private Integer id;
     private Integer aihealue;
     private String nimi;
-//    private Timestamp aika;
 
-    public Viestiketju(Integer id, Integer aihealue, String nimi
-//            , Timestamp aika
-    ){
+    public Viestiketju(Integer id, Integer aihealue, String nimi){
         this.id = id;
         this.aihealue = aihealue;
         this.nimi = nimi;
-//        this.aika = aika;
     }
 
     public Integer getId() {
@@ -42,13 +38,6 @@ public class Viestiketju {
         this.nimi = nimi;
     }
 
-//    public Timestamp getAika() {
-//        return aika;
-//    }
-//
-//    public void setAika(Timestamp aika) {
-//        this.aika = aika;
-//    }
     
     
     

@@ -56,7 +56,7 @@ public class ViestiDao implements Dao<Viesti, Integer> {
         Integer aihe = rs.getInt("aihe");
         String teksti = rs.getString("teksti");
         String lahettaja = rs.getString("lähettäjä");
-        Timestamp lahetysaika = rs.getTimestamp("lähetysaika");
+        String lahetysaika = rs.getString("lähetysaika");
         String otsikko = rs.getString("otsikko");
 
         Viesti v = new Viesti(id, aihe, teksti, lahettaja, lahetysaika, otsikko);
@@ -81,7 +81,7 @@ public class ViestiDao implements Dao<Viesti, Integer> {
             Integer aihe = rs.getInt("aihe");
             String teksti = rs.getString("teksti");
             String lahettaja = rs.getString("lähettäjä");
-            Timestamp lahetysaika = rs.getTimestamp("lähetysaika");
+            String lahetysaika = rs.getString("lähetysaika");
             String otsikko = rs.getString("otsikko");
 
             Viesti v = new Viesti(id, aihe, teksti, lahettaja, lahetysaika, otsikko);

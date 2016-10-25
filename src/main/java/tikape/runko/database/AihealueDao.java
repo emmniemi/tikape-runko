@@ -75,11 +75,8 @@ public class AihealueDao implements Dao<Aihealue, Integer> {
             Integer id = rs.getInt("id");
             Integer aihealue = rs.getInt("aihealue");
             String nimi = rs.getString("nimi");
-//            Timestamp aika = rs.getTimestamp("aika");
             
-            Viestiketju viestiketju = new Viestiketju(id, aihealue, nimi
-//                    aika
-                    );
+            Viestiketju viestiketju = new Viestiketju(id, aihealue, nimi);
             
             viestiketjut.add(viestiketju);
             

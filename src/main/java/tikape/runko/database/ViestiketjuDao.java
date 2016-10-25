@@ -37,11 +37,8 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
         Integer id = rs.getInt("id");
         Integer aihealue = rs.getInt("aihealue");
         String nimi = rs.getString("nimi");
-//        Timestamp aika = rs.getTimestamp("aika");
 
-        Viestiketju a = new Viestiketju(id, aihealue, nimi
-        //                ,aika
-        );
+        Viestiketju a = new Viestiketju(id, aihealue, nimi);
 
         rs.close();
         stmt.close();
@@ -82,11 +79,8 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
             Integer id = rs.getInt("id");
             Integer aihealue = rs.getInt("aihealue");
             String nimi = rs.getString("nimi");
-//            Timestamp aika = rs.getTimestamp("aika");
 
-            Viestiketju a = new Viestiketju(id, aihealue, nimi
-            //                    ,aika
-            );
+            Viestiketju a = new Viestiketju(id, aihealue, nimi);
             aiheet.add(a);
 
         }
@@ -115,7 +109,7 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
 //            Timestamp lahetysaika = rs.getTimestamp("lahetysaika");
             String otsikko = rs.getString("otsikko");
 
-            //            Timestamp aika = rs.getTimestamp("aika");
+//            Timestamp aika = rs.getTimestamp("aika");
             Viesti v = new Viesti(id, viestiketju, teksti, lahettaja, otsikko);
 
             viestit.add(v);
