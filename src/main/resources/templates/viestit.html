@@ -75,11 +75,12 @@
             <h2 th:text="${viestiketjunnimi}"> </h2>      
 
         
-        <table width="600px"> 
+        <table width="700px"> 
             <tr th:each="viesti: ${viestit}">
                 <td width="100px" th:text="${viesti.getOtsikko()}">teksti</td>
                 <td width="100px" th:text="${viesti.getLahettaja()}">teksti2</td>
                 <td width="400px" th:text="${viesti.getTeksti()}">teksti3</td>
+                <td width="100px" th:text="${viesti.getLahetysaika()}">teksti2</td>
             </tr>
         </table>  
         

@@ -1,11 +1,9 @@
-
 package tikape.runko.database;
 
 import java.sql.*;
 import java.util.*;
 import tikape.runko.domain.Aihealue;
 import tikape.runko.domain.Viestiketju;
-
 
 public class AihealueDao implements Dao<Aihealue, Integer> {
 
@@ -38,7 +36,7 @@ public class AihealueDao implements Dao<Aihealue, Integer> {
 
         return aa;
     }
-    
+
     public String haeAiheenNimi(Integer key) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Aihealue WHERE id = ?");
@@ -50,39 +48,59 @@ public class AihealueDao implements Dao<Aihealue, Integer> {
             return null;
         }
 
-       
         String aiheenNimi = rs.getString("aiheenNimi");
-
-        
 
         rs.close();
         stmt.close();
         connection.close();
         return aiheenNimi;
     }
-    
-    
+
+    public HashMap<Integer, Integer> haeViestiketjujenMaara() throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT Aihealue.id AS aihealue, COUNT(Viestiketju.id) AS viestienLukumaara FROM Aihealue LEFT JOIN Viestiketju "
+                + "ON Aihealue.id = Viestiketju.aihealue GROUP BY Aihealue.id");
+
+        ResultSet rs = stmt.executeQuery();
+        HashMap<Integer, Integer> mappi = new HashMap<>();
+        
+        while (rs.next()) {
+
+            Integer aihealue = rs.getInt("aihealue");
+            Integer viestienLukumaara = rs.getInt("viestienLukumaara");
+            mappi.put(aihealue, viestienLukumaara);
+
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return mappi;
+    }
+
     public List<Viestiketju> haeViestiketjut(Integer key) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viestiketju WHERE aihealue = ?");
-        
+
         stmt.setObject(1, key);
-        
+
         ResultSet rs = stmt.executeQuery();
         List<Viestiketju> viestiketjut = new ArrayList<>();
-        
-        while(rs.next()) {
+
+        while (rs.next()) {
             Integer id = rs.getInt("id");
             Integer aihealue = rs.getInt("aihealue");
             String nimi = rs.getString("nimi");
-            
-            Viestiketju viestiketju = new Viestiketju(id, aihealue, nimi);
-            
+//            Timestamp aika = rs.getTimestamp("aika");
+
+            Viestiketju viestiketju = new Viestiketju(id, aihealue, nimi
+            //                    aika
+            );
+
             viestiketjut.add(viestiketju);
-            
+
         }
-        
-        
 
         rs.close();
         stmt.close();
@@ -101,11 +119,10 @@ public class AihealueDao implements Dao<Aihealue, Integer> {
         List<Aihealue> aihealueet = new ArrayList<>();
         while (rs.next()) {
 
-            
-        Integer id = rs.getInt("id");
-        String aiheenNimi = rs.getString("aiheenNimi");
+            Integer id = rs.getInt("id");
+            String aiheenNimi = rs.getString("aiheenNimi");
 
-        Aihealue aa = new Aihealue(id, aiheenNimi);
+            Aihealue aa = new Aihealue(id, aiheenNimi);
             aihealueet.add(aa);
 
         }
@@ -116,7 +133,7 @@ public class AihealueDao implements Dao<Aihealue, Integer> {
 
         return aihealueet;
     }
-    
+
     public void lisaaAihealue(String aiheenNimi) throws Exception {
         Connection connection = database.getConnection();
         Statement stmt = connection.createStatement();
@@ -128,10 +145,7 @@ public class AihealueDao implements Dao<Aihealue, Integer> {
         stmt.execute(kysely);
         connection.close();
 
-
     }
-    
- 
 
     @Override
     public void delete(Integer key) throws SQLException {
@@ -139,4 +153,3 @@ public class AihealueDao implements Dao<Aihealue, Integer> {
     }
 
 }
-

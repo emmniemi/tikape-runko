@@ -22,6 +22,36 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
         this.database = database;
     }
 
+    public HashMap<Integer, Integer> haeViestienMaara(int key) throws SQLException {
+        Connection connection = database.getConnection();
+        
+        PreparedStatement stmt2 = connection.prepareStatement("SELECT Viestiketju.id AS viestiketju, COUNT(Viesti.id) AS viestienLukumaara FROM Viestiketju "
+                + "LEFT JOIN Viesti "
+                + "ON Viestiketju.id = Viesti.viestiketju "
+                + "WHERE Viestiketju.aihealue = ? "
+                + "GROUP BY Viestiketju.id");
+        
+
+        stmt2.setObject(1, key);
+
+        ResultSet rs = stmt2.executeQuery();
+        HashMap<Integer, Integer> mappi = new HashMap<>();
+
+        while (rs.next()) {
+
+            Integer viestiketju = rs.getInt("viestiketju");
+            Integer viestienLukumaara = rs.getInt("viestienLukumaara");
+            mappi.put(viestiketju, viestienLukumaara);
+
+        }
+
+        rs.close();
+        stmt2.close();
+        connection.close();
+
+        return mappi;
+    }
+
     @Override
     public Viestiketju findOne(Integer key) throws SQLException {
         Connection connection = database.getConnection();
@@ -37,8 +67,11 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
         Integer id = rs.getInt("id");
         Integer aihealue = rs.getInt("aihealue");
         String nimi = rs.getString("nimi");
+//        Timestamp aika = rs.getTimestamp("aika");
 
-        Viestiketju a = new Viestiketju(id, aihealue, nimi);
+        Viestiketju a = new Viestiketju(id, aihealue, nimi
+        //                ,aika
+        );
 
         rs.close();
         stmt.close();
@@ -79,8 +112,11 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
             Integer id = rs.getInt("id");
             Integer aihealue = rs.getInt("aihealue");
             String nimi = rs.getString("nimi");
+//            Timestamp aika = rs.getTimestamp("aika");
 
-            Viestiketju a = new Viestiketju(id, aihealue, nimi);
+            Viestiketju a = new Viestiketju(id, aihealue, nimi
+            //                    ,aika
+            );
             aiheet.add(a);
 
         }
@@ -106,11 +142,10 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
             Integer viestiketju = rs.getInt("viestiketju");
             String teksti = rs.getString("teksti");
             String lahettaja = rs.getString("lahettaja");
-//            Timestamp lahetysaika = rs.getTimestamp("lahetysaika");
+            String lahetysaika = rs.getString("lahetysaika");
             String otsikko = rs.getString("otsikko");
 
-//            Timestamp aika = rs.getTimestamp("aika");
-            Viesti v = new Viesti(id, viestiketju, teksti, lahettaja, otsikko);
+            Viesti v = new Viesti(id, viestiketju, teksti, lahettaja, lahetysaika, otsikko);
 
             viestit.add(v);
 
@@ -135,7 +170,7 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
         Statement stmt = connection.createStatement();
 
         String kysely = "INSERT INTO Viestiketju (aihealue, nimi) VALUES (" + aihealue + ", '" + nimi + "')";
-        
+
         stmt.execute(kysely);
         connection.close();
 
