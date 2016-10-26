@@ -1,6 +1,9 @@
 package tikape.runko;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 import spark.ModelAndView;
 import spark.Spark;
 import static spark.Spark.*;
@@ -12,7 +15,9 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Database database = new Database("jdbc:sqlite:keskustelupalsta.db");
         database.init();
+        
         Spark.staticFileLocation("public");
+        
         ViestiDao viestiDao = new ViestiDao(database);
         AihealueDao aihealueDao = new AihealueDao(database);
         ViestiketjuDao viestiketjuDao = new ViestiketjuDao(database);
@@ -31,20 +36,16 @@ public class Main {
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
         
-        get("/viestihaku/hakusana", (req, res) -> {
+        get("/viestihaku", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("haetutViestit", viestiDao.haeHakusanalla(req.params("hakusana")));
+            map.put("haetutViestit", viestiDao.haeHakusanalla(req.queryParams("hakusana")));
+            map.put("haetutAihealueet", aihealueDao.haeAiheenNimi(aihealueDao.haeAihealueHakusanalla(req.queryParams("hakusana"))));         
             
             
            return new ModelAndView(map, "viestihaku"); 
         }, new ThymeleafTemplateEngine());
         
-//        post("/aihealueet", (req, res) -> {
-//            viestiDao.haeHakusanalla("hakusana");
-//            res.redirect("/viestihaku/hakusana");
-//            return "ok";
-//        });
-        
+
         
         get("/aihealueet/:id", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -60,13 +61,9 @@ public class Main {
         
         get("/aihealueet/:aid/:id", (req, res) -> {
             HashMap map = new HashMap<>();
-            
-            
+
             map.put("aihealueennimi", aihealueDao.haeAiheenNimi(Integer.parseInt(req.params(":aid"))));
             map.put("viestiketjunnimi", viestiketjuDao.haeViestiketjunNimi(Integer.parseInt(req.params(":id"))));
-            
-            
-            
             map.put("viestit", viestiketjuDao.haeViestit(Integer.parseInt(req.params("id"))));
             map.put("aihealuetunnus", req.params(":aid"));
             map.put("viestiketjutunnus", req.params(":id"));

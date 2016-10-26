@@ -4,9 +4,7 @@
     <head>
         <title>Foorumi</title>
         <meta charset="utf-8" />
-                          <link th:href="@{https://fonts.googleapis.com/css?family=Cabin|Kaushan+Script|Lobster|Oswald|Roboto|Lora}" rel='stylesheet' type='text/css' />
-        <style>
-            body {
+        <style>            body {
                 background-color: #f3f3f3;
                 font-size: 16px;
                 font-family: 'Roboto', serif;
@@ -59,14 +57,23 @@
             a:active {
             color:#000000;
             }
+            a.h:link, a.h:visited, a.h:hover, a.h:active {
+            color:#c91811;
+            text-decoration: none;
+            
+            }
         </style>
+        <link th:href="@{https://fonts.googleapis.com/css?family=Cabin|Kaushan+Script|Lobster|Oswald|Roboto|Lora}" rel='stylesheet' type='text/css' />
+        
     </head>
 
     <body>
         <center>
+        
+            <div id="wrapper">
             
-                        <div id="wrapper">
-        <h1>Sivistynyt keskustelupasta</h1>
+                
+        <h1><a class="h" th:href="@{~/aihealueet}">Sivistynyt keskustelupasta</a></h1>
         <hr/>
         <h3>Aihealue: <span th:text="${aihealueennimi}"/> </h3>
         
@@ -95,7 +102,7 @@
                 <tr>
                     <td width="250px;">Viestiketjun nimi:</td>
                     <td width="350px;"><input type="text" name="nimi" style="width: 350px;"/></td>
-                    <td><input type="submit"/></td>
+                    <td><input type="submit" value="Lähetä"/></td>
                 </tr>
             </table>
             

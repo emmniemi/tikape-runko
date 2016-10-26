@@ -24,13 +24,12 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
 
     public HashMap<Integer, Integer> haeViestienMaara(int key) throws SQLException {
         Connection connection = database.getConnection();
-        
+
         PreparedStatement stmt2 = connection.prepareStatement("SELECT Viestiketju.id AS viestiketju, COUNT(Viesti.id) AS viestienLukumaara FROM Viestiketju "
                 + "LEFT JOIN Viesti "
                 + "ON Viestiketju.id = Viesti.viestiketju "
                 + "WHERE Viestiketju.aihealue = ? "
                 + "GROUP BY Viestiketju.id");
-        
 
         stmt2.setObject(1, key);
 
@@ -50,6 +49,30 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
         connection.close();
 
         return mappi;
+    }
+
+    public String haeNimiIDlla(Integer viestiketjuID) throws SQLException {
+
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT Viestiketju.nimi FROM Viestiketju"
+                + " WHERE Viestiketju.id = ?");
+
+        stmt.setObject(1, viestiketjuID);
+
+        ResultSet rs = stmt.executeQuery();
+
+        boolean hasOne = rs.next();
+        if (!hasOne) {
+            return null;
+        }
+
+        String nimi = rs.getString("nimi");
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return nimi;
     }
 
     @Override

@@ -92,11 +92,7 @@ public class AihealueDao implements Dao<Aihealue, Integer> {
             Integer id = rs.getInt("id");
             Integer aihealue = rs.getInt("aihealue");
             String nimi = rs.getString("nimi");
-//            Timestamp aika = rs.getTimestamp("aika");
-
-            Viestiketju viestiketju = new Viestiketju(id, aihealue, nimi
-            //                    aika
-            );
+            Viestiketju viestiketju = new Viestiketju(id, aihealue, nimi);
 
             viestiketjut.add(viestiketju);
 
@@ -139,12 +135,33 @@ public class AihealueDao implements Dao<Aihealue, Integer> {
         Statement stmt = connection.createStatement();
 
         String kysely = "INSERT INTO Aihealue (aiheenNimi) VALUES ('" + aiheenNimi + "')";
-        System.out.println("");
-        System.out.println(kysely);
-        System.out.println("");
         stmt.execute(kysely);
         connection.close();
 
+    }
+    
+     public Integer haeAihealueHakusanalla(String hakusana) throws SQLException {
+
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT Aihealue.id as aihealue FROM Viesti, Viestiketju, Aihealue "
+                + "WHERE Viesti.viestiketju = Viestiketju.id AND Viestiketju.aihealue = Aihealue.id "
+                + " AND Viesti.teksti LIKE '%" + hakusana + "%' OR Viesti.otsikko LIKE '%" + hakusana + "%'" );
+
+        
+        ResultSet rs = stmt.executeQuery();
+
+        boolean hasOne = rs.next();
+        if (!hasOne) {
+            return null;
+        }
+
+        int aihealueId = rs.getInt("aihealue");
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return aihealueId;
     }
 
     @Override
