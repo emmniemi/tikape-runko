@@ -74,7 +74,36 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
 
         return nimi;
     }
+    
+    public HashMap<Integer, String> haeViimeinenViesti(int key) throws SQLException {
+        Connection connection = database.getConnection();
 
+        PreparedStatement stmt = connection.prepareStatement("SELECT Viestiketju.id AS id, Viesti.lahetysaika AS viimeinen FROM Viesti "
+                + "LEFT JOIN Viestiketju "
+                + "ON Viesti.viestiketju = Viestiketju.id WHERE Viestiketju.id = ?"
+                + "GROUP BY viimeinen ORDER BY viimeinen DESC LIMIT 1");
+
+        stmt.setObject(1, key);
+
+        ResultSet rs = stmt.executeQuery();
+
+        HashMap<Integer, String> mappi = new HashMap<>();
+
+        while (rs.next()) {
+
+            Integer id = rs.getInt("id");
+            String viimeinenViesti = rs.getString("viimeinen");
+            mappi.put(id, viimeinenViesti);
+
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return mappi;
+    }
+    
     @Override
     public Viestiketju findOne(Integer key) throws SQLException {
         Connection connection = database.getConnection();

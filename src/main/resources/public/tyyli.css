@@ -1,9 +1,11 @@
-                        body {
+                body {
                 background-color: #f3f3f3;
                 font-size: 16px;
                 font-family: 'Roboto', serif;
-                margin-top: 20px;
+                margin-top: 30px;
+                margin-bottom: 50px;
                 line-height: 1.5;
+                overflow:scroll;	
             }
             #wrapper {
                 background-color: #fefefe;
@@ -13,6 +15,7 @@
                 border-color: #cecece;
                 padding-top: 10px;
                 padding-bottom: 40px;
+                text-align: left;
             }
             h1 {
                 font-family: 'Kaushan Script', cursive;
@@ -39,6 +42,7 @@
             ul {
                 list-style-type: none;
             }
+
             
             a:link, a:visited {
             color:#000000;

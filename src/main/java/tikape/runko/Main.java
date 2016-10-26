@@ -52,6 +52,7 @@ public class Main {
             
             map.put("aihealuetunnus", req.params(":id"));
             map.put("viestienLukumaarat", viestiketjuDao.haeViestienMaara(Integer.parseInt(req.params(":id"))));
+            map.put("viimeinenViesti", viestiketjuDao.haeViimeinenViesti(Integer.parseInt(req.params(":id"))));
             map.put("aihealueennimi", aihealueDao.haeAiheenNimi(Integer.parseInt(req.params(":id"))));
             map.put("viestiketjut", aihealueDao.haeViestiketjut(Integer.parseInt(req.params("id"))));
             

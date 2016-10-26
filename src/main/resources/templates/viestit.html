@@ -5,12 +5,14 @@
         <title>Foorumi</title>
         <meta charset="utf-8" />
         <link th:href="@{https://fonts.googleapis.com/css?family=Cabin|Kaushan+Script|Lobster|Oswald|Roboto|Lora}" rel='stylesheet' type='text/css' />
-        <style>            body {
+                <style>                body {
                 background-color: #f3f3f3;
                 font-size: 16px;
                 font-family: 'Roboto', serif;
-                margin-top: 20px;
+                margin-top: 30px;
+                margin-bottom: 50px;
                 line-height: 1.5;
+                overflow:scroll;	
             }
             #wrapper {
                 background-color: #fefefe;
@@ -20,6 +22,7 @@
                 border-color: #cecece;
                 padding-top: 10px;
                 padding-bottom: 40px;
+                text-align: left;
             }
             h1 {
                 font-family: 'Kaushan Script', cursive;
@@ -38,7 +41,7 @@
                 line-height: 2.8;
             }
             hr {
-                width: 600px;
+                width: 700px;
                 height: 1px;
                 border: 0px;
                 background-color: #cecece;
@@ -47,6 +50,7 @@
                 list-style-type: none;
             }
 
+            
             a:link, a:visited {
             color:#000000;
             }
@@ -62,8 +66,8 @@
             color:#c91811;
             text-decoration: none;
             
-            }
-        </style>
+            }</style>
+
         
     </head>
 
@@ -71,38 +75,40 @@
         <center>
                         <div id="wrapper">
 
+                            <center>
+                                
             <h1><a class="h" th:href="@{~/aihealueet}">Sivistynyt keskustelupasta</a></h1>
             <hr/>
 
             <h3>Aihealue: <span th:text="${aihealueennimi}"/> </h3>
             <h2 th:text="${viestiketjunnimi}"> </h2>      
 
-        
-<!--        <table width="700px"> 
-            <tr th:each="viesti: ${viestit}">
-                <td width="100px" th:text="${viesti.getOtsikko()}">teksti</td>
-                <td width="100px" th:text="${viesti.getLahettaja()}">teksti2</td>
-                <td width="400px" th:text="${viesti.getTeksti()}">teksti3</td>
-                <td width="100px" th:text="${viesti.getLahetysaika()}">teksti2</td>
-            </tr>
-        </table>  -->
-            
-            <table width="800px">
+
+<!--            <table width="800px">
                 <tr>
                     <td>
                     <ul>
                         <li th:each="viesti: ${viestit}">
-                            <b>Otsikko:</b> <span th:text="${viesti.getOtsikko()}">jee</span><br/>
-                            <b>Kirjoittaja:</b> <span th:text="${viesti.getLahettaja()}">jee</span><br/>
-                            <b>Viesti:</b> <span th:text="${viesti.getTeksti()}">jee</span><br/>
-                            <b>Lähetysaika:</b> <span th:text="${viesti.getLahetysaika()}">jee</span><br/><br/><br/></li>
+                            <b>Otsikko:</b> <span style="padding-left:46px;" th:text="${viesti.getOtsikko()}">jee</span><br/>
+                            <b>Kirjoittaja:</b> <span style="padding-left:32px;" th:text="${viesti.getLahettaja()}">jee</span><br/>
+                            <b>Viesti:</b> <span style="padding-left:60px;" th:text="${viesti.getTeksti()}">jee</span><br/>
+                            <b>Lähetysaika:</b> <span style="padding-left:15px;" th:text="${viesti.getLahetysaika()}">jee</span><br/><br/><br/></li>
                     </ul>
                     </td>
                 </tr>
-            </table>
+            </table>-->
+
+            <div style="width:800px; text-align:left; padding-left:20px;">
+                    <ul>
+                        <li th:each="viesti: ${viestit}">
+                            <span style="font-weight:bold;line-height:2.2em;" th:text="${viesti.getOtsikko()}">jee</span><br/>
+                            <span th:text="${viesti.getTeksti()}">jee</span><br/><br/>
+                            <span style="color:#c91811;" th:text="${viesti.getLahettaja()}">jee</span>&nbsp; kirjoitti&nbsp;
+                            <span style="line-height:-5em;" th:text="${viesti.getLahetysaika()}">jee</span><br/><br/><br/></li>
+                    </ul>
+            </div>            
             
         
-
         <hr/>
         <h3>Kirjoita viestiketjuun uusi viesti</h3>
         
@@ -129,6 +135,8 @@
             </table>
             
         </form>
+        
+</center>
 
                         </div>
         </center>
