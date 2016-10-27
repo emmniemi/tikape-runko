@@ -43,6 +43,9 @@ public class Viesti {
     public String getLahettaja() {
         return lahettaja;
     }
+    public Integer getViestiketju() {
+        return viestiketju;
+    }
 
     public String getLahetysaika() {
         return lahetysaika;
@@ -71,5 +74,6 @@ public class Viesti {
     public void setTeksti(String teksti) {
         this.teksti = teksti;
     }
+    
 
 }

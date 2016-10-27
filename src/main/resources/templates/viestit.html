@@ -4,91 +4,106 @@
     <head>
         <title>Foorumi</title>
         <meta charset="utf-8" />
-                  <link th:href="@{https://fonts.googleapis.com/css?family=Cabin|Kaushan+Script|Lobster|Oswald|Roboto|Lora}" rel='stylesheet' type='text/css' />
-        <style>
+        <link th:href="@{https://fonts.googleapis.com/css?family=Cabin|Kaushan+Script|Roboto|Playfair+Display:400,900,900i}" rel='stylesheet' type='text/css' />
+                <style>
             body {
-                background-color: #f3f3f3;
+                background-color: #efefef;
                 font-size: 16px;
+                color: #4b4d52;
                 font-family: 'Roboto', serif;
-                margin-top: 20px;
+                margin-top: 30px;
+                margin-bottom: 50px;
                 line-height: 1.5;
+                overflow:scroll;	
             }
             #wrapper {
-                background-color: #fefefe;
+                background-color: #ffffff;
                 width: 900px;
                 border-radius: 50px;
                 border: 1px solid;
-                border-color: #cecece;
+                border-color: #e1e1e1;
                 padding-top: 10px;
                 padding-bottom: 40px;
+                text-align: left;
             }
             h1 {
-                font-family: 'Kaushan Script', cursive;
+                font-family: 'Playfair Display', serif;
                 font-size: 58px;
-                color: #c91811; 
-                line-height: 1.4;
+                font-style: italic;
+                font-weight: 400;
+                color: #f1831d; 
+                line-height: 1.8;
             }
             h2 {
-                font-family: 'Cabin', sans-serif;
+                font-family: 'Playfair Display', serif;
                 font-size: 24px;
+                font-weight: 900;
                 line-height: 2;
             }
             h3 {
-                font-size: 16px;
+                font-size: 15px;
                 text-transform: uppercase;
                 line-height: 2.8;
+                color: #ffffff;
+                background-color: #e41a6a;
+                display: block;
             }
             hr {
-                width: 600px;
+                width: 700px;
                 height: 1px;
                 border: 0px;
-                background-color: #cecece;
+                background-color: #e1e1e1;
             }
             ul {
                 list-style-type: none;
             }
+
             
             a:link, a:visited {
-            color:#000000;
+            color:#f1831d;
             }
 
             a:hover {
-            color:#c91811;
+            color:#ff9900;
             }
 
             a:active {
-            color:#000000;
+            color:#f1831d;
             }
-        </style>
+            a.h:link, a.h:visited, a.h:hover, a.h:active {
+            color:#83107E;
+            text-decoration: none;
+            
+            }</style>
+
+        
     </head>
 
     <body>
         <center>
                         <div id="wrapper">
-<!--            EI TOIMI! Tarttis tehdä jotain-->
-            <!--<img src="/foorumikuva.jpg" alt=""/>-->
 
-            <h1>Sivistynyt keskustelupasta</h1>
-            <hr/>
+                            <center>
+                                
+            <h1><a class="h" th:href="@{~/aihealueet}">Sivistynyt keskustelupasta</a></h1>
 
-            <h3>Aihealue: <span th:text="${aihealueennimi}"/> </h3>
+
+            <h3>Aihealue: <span th:text="${aihealueennimi}"/></h3>
             <h2 th:text="${viestiketjunnimi}"> </h2>      
 
+
+            <div style="width:800px; text-align:left; padding-left:20px;">
+                    <ul>
+                        <li th:each="viesti: ${viestit}">
+                            <span style="font-weight:bold;line-height:2.2em;" th:text="${viesti.getOtsikko()}">jee</span><br/>
+                            <span th:text="${viesti.getTeksti()}">jee</span><br/><br/>
+                            <span style="color:#f1831d;" th:text="${viesti.getLahettaja()}">jee</span>&nbsp; kirjoitti&nbsp;
+                            <span style="line-height:-5em;" th:text="${viesti.getLahetysaika()}">jee</span><br/><br/><br/></li>
+                    </ul>
+            </div>            
         
-        <table width="700px"> 
-            <tr th:each="viesti: ${viestit}">
-                <td width="100px" th:text="${viesti.getOtsikko()}">teksti</td>
-                <td width="100px" th:text="${viesti.getLahettaja()}">teksti2</td>
-                <td width="400px" th:text="${viesti.getTeksti()}">teksti3</td>
-                <td width="100px" th:text="${viesti.getLahetysaika()}">teksti2</td>
-            </tr>
-        </table>  
-        
-        <br/>
-        <br/>
-        <hr/>
         <h3>Kirjoita viestiketjuun uusi viesti</h3>
-        
+        <br/>
         
         <form th:action="@{~/aihealueet/{aid}/{id} (id=${viestiketjutunnus}, aid=${aihealuetunnus})}" method="POST">
             
@@ -107,11 +122,13 @@
                 </tr>   
                 <tr>
                     <td width="100px"> </td>
-                    <td width="500px"><input type="submit"/></td>
+                    <td width="500px"><input type="submit" value="Lähetä"/></td>
                 </tr>
             </table>
             
         </form>
+        
+</center>
 
                         </div>
         </center>

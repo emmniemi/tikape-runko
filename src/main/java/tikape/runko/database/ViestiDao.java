@@ -69,19 +69,21 @@ public class ViestiDao implements Dao<Viesti, Integer> {
     public List<Viesti> haeHakusanalla(String hakusana) throws SQLException {
 
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viesti WHERE Viesti.teksti LIKE '%" + hakusana + "%'");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viesti"
+                + " WHERE Viesti.teksti LIKE '%" + hakusana + "%' OR Viesti.otsikko LIKE '%"
+                + "" + hakusana + "%'" );
 
         ResultSet rs = stmt.executeQuery();
         List<Viesti> viestit = new ArrayList<>();
         while (rs.next()) {
             Integer id = rs.getInt("id");
-            Integer aihe = rs.getInt("aihe");
+            Integer viestiketju = rs.getInt("viestiketju");
             String teksti = rs.getString("teksti");
-            String lahettaja = rs.getString("lähettäjä");
-            String lahetysaika = rs.getString("lähetysaika");
+            String lahettaja = rs.getString("lahettaja");
+            String lahetysaika = rs.getString("lahetysaika");
             String otsikko = rs.getString("otsikko");
 
-            Viesti v = new Viesti(id, aihe, teksti, lahettaja, lahetysaika, otsikko);
+            Viesti v = new Viesti(id, viestiketju, teksti, lahettaja, lahetysaika, otsikko);
             viestit.add(v);
         }
 
@@ -91,6 +93,7 @@ public class ViestiDao implements Dao<Viesti, Integer> {
 
         return viestit;
     }
+    
 
     @Override
     public List<Viesti> findAll() throws SQLException {
