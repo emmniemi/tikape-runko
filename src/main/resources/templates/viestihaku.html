@@ -5,7 +5,7 @@
         <title>Foorumi</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" type="text/css" href="tyyli.css"/>
-        <link th:href="@{https://fonts.googleapis.com/css?family=Cabin|Kaushan+Script|Lobster|Oswald|Roboto|Lora}" rel='stylesheet' type='text/css' />
+        <link th:href="@{https://fonts.googleapis.com/css?family=Cabin|Kaushan+Script|Roboto|Playfair+Display:400,900,900i}" rel='stylesheet' type='text/css' />
         
     </head>
 
@@ -14,10 +14,10 @@
                         <div id="wrapper">
                             <center>
             <h1><a class="h" th:href="@{~/aihealueet}">Sivistynyt keskustelupasta</a></h1>
-            <hr/>
+
 
                     <h3>Haku</h3>
-        
+        <br/>
         <form th:action="@{~/viestihaku}" method="GET">
             
             <table width="600px">
@@ -41,7 +41,7 @@
                         <li th:each="viesti: ${haetutViestit}">
                             <span style="font-weight:bold;line-height:2.2em;" th:text="${viesti.getOtsikko()}">jee</span><br/>
                             <span th:text="${viesti.getTeksti()}">jee</span><br/><br/>
-                            <span style="color:#c91811;" th:text="${viesti.getLahettaja()}">jee</span>&nbsp; kirjoitti&nbsp;
+                            <span style="color:#f1831d;" th:text="${viesti.getLahettaja()}">jee</span>&nbsp; kirjoitti&nbsp;
                             <span style="line-height:-5em;" th:text="${viesti.getLahetysaika()}">jee</span><br/><br/><br/></li>
                     </ul>
             </div>      

@@ -5,7 +5,7 @@
         <title>Foorumi</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" type="text/css" href="tyyli.css"/>
-        <link th:href="@{https://fonts.googleapis.com/css?family=Cabin|Kaushan+Script|Lobster|Oswald|Roboto|Lora}" rel='stylesheet' type='text/css' />
+        <link th:href="@{https://fonts.googleapis.com/css?family=Cabin|Kaushan+Script|Roboto|Playfair+Display:400,900,900i}" rel='stylesheet' type='text/css' />
         
     </head>
 
@@ -18,10 +18,10 @@
         <h1><a class="h" th:href="@{~/aihealueet}">Sivistynyt keskustelupasta</a></h1>
         
         
-        <hr/>
-        <h2>Aihealueet</h2>
+        <h3>Aihealueet</h3>
         
-        <a th:href="@{~/viestihaku}"><b>Haku</b></a>
+        <br/>
+        <a th:href="@{~/viestihaku}"><b>Hae viestejä</b></a>
             
 
         <br/>
@@ -32,33 +32,33 @@
         
         <table width="600px"> 
             <tr>
-                <td width="300px"><b>Aihealueet</b></td>
-                <td width="300px"><b>Viestiketjujen lukumäärä</b></td>
+                <td width="400px"><b>Aihealueet</b></td>
+                <td width="200px"><b>Viestiketjuja</b></td>
             </tr>
             <tr th:each="aihealue: ${aihealueet}">
-                <td width="300px">
+                <td width="400px">
                     <a th:href="@{~/aihealueet/{aid}(aid=${aihealue.id})}" 
                             th:text="${aihealue.aiheenNimi}">Aihealue</a></td>
-                <td width="300px" th:text="${viestiketjujenLukumaarat.get(aihealue.id)}">teksti2</td>
+                <td width="200px" th:text="${viestiketjujenLukumaarat.get(aihealue.id)}">teksti2</td>
             </tr>
         </table>  
         
         <br/>
-        <hr/>
         
         <h3>Lisää uusi aihealue</h3>
-        
+        <br/>
         <form th:action="@{~/aihealueet}" method="POST">
             
             <table width="600px">
                 <tr>
-                    <td width="250px;">Aiheen nimi:</td>
+                    <td width="250px;">Aihealueen nimi:</td>
                     <td width="350px;"><input type="text" name="aiheenNimi" style="width: 350px;"/></td>
                     <td><input type="submit" value="Lähetä"/></td>
                 </tr>
             </table>
             
         </form>
+            <br/>
                 </center>
         
             </div>

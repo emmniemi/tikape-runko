@@ -80,8 +80,8 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
 
         PreparedStatement stmt = connection.prepareStatement("SELECT Viestiketju.id AS id, Viesti.lahetysaika AS viimeinen FROM Viesti "
                 + "LEFT JOIN Viestiketju "
-                + "ON Viesti.viestiketju = Viestiketju.id WHERE Viestiketju.id = ?"
-                + "GROUP BY viimeinen ORDER BY viimeinen DESC LIMIT 1");
+                + "ON Viesti.viestiketju = Viestiketju.id WHERE Viestiketju.aihealue = ?"
+                + "GROUP BY Viestiketju.id ORDER BY viimeinen DESC");
 
         stmt.setObject(1, key);
 
