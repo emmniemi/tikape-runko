@@ -36,7 +36,7 @@ public class Main {
         
         get("/aihealueet", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("aihealueet", aihealueDao.findAll());
+            map.put("aihealueet", aihealueDao.haeKaikki());
             map.put("viestiketjujenLukumaarat", aihealueDao.haeViestiketjujenMaara());
 
             return new ModelAndView(map, "index");

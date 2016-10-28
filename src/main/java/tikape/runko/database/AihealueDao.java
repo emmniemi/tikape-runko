@@ -14,7 +14,7 @@ public class AihealueDao implements Dao<Aihealue, Integer> {
     }
 
     @Override
-    public Aihealue findOne(Integer key) throws SQLException {
+    public Aihealue haeYksi(Integer key) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viestiketju WHERE id = ?");
         stmt.setObject(1, key);
@@ -106,7 +106,7 @@ public class AihealueDao implements Dao<Aihealue, Integer> {
     }
 
     @Override
-    public List<Aihealue> findAll() throws SQLException {
+    public List<Aihealue> haeKaikki() throws SQLException {
 
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Aihealue");
@@ -165,7 +165,7 @@ public class AihealueDao implements Dao<Aihealue, Integer> {
     }
 
     @Override
-    public void delete(Integer key) throws SQLException {
+    public void poista(Integer key) throws SQLException {
         // ei toteutettu
     }
 

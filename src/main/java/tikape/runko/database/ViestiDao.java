@@ -39,7 +39,7 @@ public class ViestiDao implements Dao<Viesti, Integer> {
     }
 
     @Override
-    public Viesti findOne(Integer key) throws SQLException {
+    public Viesti haeYksi(Integer key) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viesti WHERE id = ?");
         stmt.setObject(1, key);
@@ -96,7 +96,7 @@ public class ViestiDao implements Dao<Viesti, Integer> {
     
 
     @Override
-    public List<Viesti> findAll() throws SQLException {
+    public List<Viesti> haeKaikki() throws SQLException {
 
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viesti");
@@ -123,7 +123,7 @@ public class ViestiDao implements Dao<Viesti, Integer> {
     }
 
     @Override
-    public void delete(Integer key) throws SQLException {
+    public void poista(Integer key) throws SQLException {
         // ei toteutettu
     }
 

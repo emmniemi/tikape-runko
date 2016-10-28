@@ -97,7 +97,7 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
     }
     
     @Override
-    public Viestiketju findOne(Integer key) throws SQLException {
+    public Viestiketju haeYksi(Integer key) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viestiketju WHERE id = ?");
         stmt.setObject(1, key);
@@ -142,7 +142,7 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
     }
 
     @Override
-    public List<Viestiketju> findAll() throws SQLException {
+    public List<Viestiketju> haeKaikki() throws SQLException {
 
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viestiketju");
@@ -211,7 +211,7 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
     }
 
     @Override
-    public void delete(Integer key) throws SQLException {
+    public void poista(Integer key) throws SQLException {
         //Ei toteutettu.
     }
 
