@@ -68,7 +68,7 @@ public class Database {
         lista.add("DROP TABLE Aihealue; DROP TABLE Viestiketju; DROP TABLE Viesti");
         lista.add("CREATE TABLE Aihealue (id SERIAL PRIMARY KEY, aiheenNimi varchar(100));");
         lista.add("CREATE TABLE Viestiketju (id SERIAL PRIMARY KEY, aihealue INTEGER,"
-                + "nimi VARCHAR(100), aika TIMESTAMP WITH LOCAL TIME ZONE NOT NULL,"
+                + "nimi VARCHAR(100), aika TIMESTAMP NOT NULL,"
                 + "FOREIGN KEY (aihealue) REFERENCES Aihealue(id));");
         lista.add("CREATE TABLE Viesti (id SERIAL PRIMARY KEY, viestiketju INTEGER,"
                 + "teksti varchar(500), lahettaja VARCHAR(50), lahetysaika DATE DEFAULT(datetime('now', 'localtime')),"
