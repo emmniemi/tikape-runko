@@ -210,9 +210,4 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
 
     }
 
-    @Override
-    public void poista(Integer key) throws SQLException {
-        //Ei toteutettu.
-    }
-
 }

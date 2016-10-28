@@ -9,5 +9,4 @@ public interface Dao<T, K> {
 
     List<T> haeKaikki() throws SQLException;
 
-    void poista(K key) throws SQLException;
 }

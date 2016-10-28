@@ -164,9 +164,5 @@ public class AihealueDao implements Dao<Aihealue, Integer> {
         return aihealueId;
     }
 
-    @Override
-    public void poista(Integer key) throws SQLException {
-        // ei toteutettu
-    }
 
 }

@@ -122,9 +122,4 @@ public class ViestiDao implements Dao<Viesti, Integer> {
         return viestit;
     }
 
-    @Override
-    public void poista(Integer key) throws SQLException {
-        // ei toteutettu
-    }
-
 }
