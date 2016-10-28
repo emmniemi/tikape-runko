@@ -24,7 +24,6 @@ public class Main {
         }
         
         Database database = new Database(jdbcOsoite);
-        database.init();
         
         Spark.staticFileLocation("public");
         
