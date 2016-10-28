@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tikape.runko.database;
 
 import java.sql.*;
@@ -10,10 +6,6 @@ import java.util.*;
 import tikape.runko.domain.Viestiketju;
 import tikape.runko.domain.Viesti;
 
-/**
- *
- * @author aleksisv
- */
 public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
 
     private Database database;
@@ -119,10 +111,8 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
         Integer id = rs.getInt("id");
         Integer aihealue = rs.getInt("aihealue");
         String nimi = rs.getString("nimi");
-//        Timestamp aika = rs.getTimestamp("aika");
 
         Viestiketju a = new Viestiketju(id, aihealue, nimi
-        //                ,aika
         );
 
         rs.close();
@@ -164,11 +154,8 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
             Integer id = rs.getInt("id");
             Integer aihealue = rs.getInt("aihealue");
             String nimi = rs.getString("nimi");
-//            Timestamp aika = rs.getTimestamp("aika");
 
-            Viestiketju a = new Viestiketju(id, aihealue, nimi
-            //                    ,aika
-            );
+            Viestiketju a = new Viestiketju(id, aihealue, nimi);
             aiheet.add(a);
 
         }
@@ -212,11 +199,6 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
         return viestit;
     }
 
-    @Override
-    public void delete(Integer key) throws SQLException {
-        // ei toteutettu
-    }
-
     public void lisaaViestiketju(Integer aihealue, String nimi) throws SQLException {
         Connection connection = database.getConnection();
         Statement stmt = connection.createStatement();
@@ -226,6 +208,11 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
         stmt.execute(kysely);
         connection.close();
 
+    }
+
+    @Override
+    public void delete(Integer key) throws SQLException {
+        //Ei toteutettu.
     }
 
 }
