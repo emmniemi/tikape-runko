@@ -62,13 +62,13 @@ public class Database {
     private List<String> postgreLauseet() {
         ArrayList<String> lista = new ArrayList<>();
         
-        lista.add("SET TIME_ZONE = '+02:00'");
+        lista.add("ALTER SESSION SET TIME_ZONE = '+02:00'");
         
         
         lista.add("DROP TABLE Aihealue; DROP TABLE Viestiketju; DROP TABLE Viesti");
         lista.add("CREATE TABLE Aihealue (id SERIAL PRIMARY KEY, aiheenNimi varchar(100));");
         lista.add("CREATE TABLE Viestiketju (id SERIAL PRIMARY KEY, aihealue INTEGER,"
-                + "nimi VARCHAR(100), aika TIMESTAMP WITH LOCAL TIMEZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,"
+                + "nimi VARCHAR(100), aika TIMESTAMP WITH LOCAL TIME ZONE NOT NULL,"
                 + "FOREIGN KEY (aihealue) REFERENCES Aihealue(id));");
         lista.add("CREATE TABLE Viesti (id SERIAL PRIMARY KEY, viestiketju INTEGER,"
                 + "teksti varchar(500), lahettaja VARCHAR(50), lahetysaika DATE DEFAULT(datetime('now', 'localtime')),"
