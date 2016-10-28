@@ -62,7 +62,7 @@ public class Database {
     private List<String> postgreLauseet() {
         ArrayList<String> lista = new ArrayList<>();
 //        
-        
+        lista.add("SET TIME ZONE 'Europe/Rome';");
         
         lista.add("DROP TABLE Aihealue; DROP TABLE Viestiketju; DROP TABLE Viesti;");
         lista.add("CREATE TABLE Aihealue (id SERIAL PRIMARY KEY, aiheenNimi varchar(100));");
