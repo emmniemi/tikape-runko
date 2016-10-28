@@ -61,11 +61,11 @@ public class Database {
     
     private List<String> postgreLauseet() {
         ArrayList<String> lista = new ArrayList<>();
+//        
+        lista.add("ALTER SESSION SET TIME_ZONE = '+02:00';");
         
-        lista.add("ALTER SESSION SET TIME_ZONE = '+02:00'");
         
-        
-        lista.add("DROP TABLE Aihealue; DROP TABLE Viestiketju; DROP TABLE Viesti");
+        lista.add("DROP TABLE Aihealue; DROP TABLE Viestiketju; DROP TABLE Viesti;");
         lista.add("CREATE TABLE Aihealue (id SERIAL PRIMARY KEY, aiheenNimi varchar(100));");
         lista.add("CREATE TABLE Viestiketju (id SERIAL PRIMARY KEY, aihealue INTEGER,"
                 + "nimi VARCHAR(100), aika TIMESTAMP NOT NULL,"
