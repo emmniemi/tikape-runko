@@ -70,7 +70,7 @@ public class Database {
                 + "nimi VARCHAR(100), aika TIMESTAMP NOT NULL,"
                 + "FOREIGN KEY (aihealue) REFERENCES Aihealue(id));");
         lista.add("CREATE TABLE Viesti (id SERIAL PRIMARY KEY, viestiketju INTEGER,"
-                + "teksti varchar(500), lahettaja VARCHAR(50), lahetysaika DATE DEFAULT(datetime('now')),"
+                + "teksti varchar(500), lahettaja VARCHAR(50), lahetysaika DATE DEFAULT(current_date),"
                 + "otsikko VARCHAR(100), FOREIGN KEY (viestiketju) REFERENCES Viestiketju(id));");
 
         return lista;
