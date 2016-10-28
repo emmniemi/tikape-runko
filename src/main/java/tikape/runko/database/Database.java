@@ -79,17 +79,17 @@ public class Database {
     private List<String> sqliteLauseet() {
         ArrayList<String> lista = new ArrayList<>();
         
-         lista.add("SET TIME_ZONE = '+02:00';");
-        
+//         lista.add("SET TIME_ZONE = '+02:00';");
 //        
-        lista.add("DROP TABLE Aihealue; DROP TABLE Viestiketju; DROP TABLE Viesti;");
-        lista.add("CREATE TABLE Aihealue (id INTEGER PRIMARY KEY, aiheenNimi varchar(100));");
-        lista.add("CREATE TABLE Viestiketju (id INTEGER PRIMARY KEY, aihealue INTEGER, "
-                + "nimi VARCHAR(100), aika TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP, "
-                + "FOREIGN KEY (aihealue) REFERENCES Aihealue(id));");
-        lista.add("CREATE TABLE Viesti (id INTEGER PRIMARY KEY, viestiketju INTEGER,"
-                + "teksti varchar(500), lahettaja VARCHAR(50), lahetysaika TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,"
-                + "otsikko VARCHAR(100), FOREIGN KEY (viestiketju) REFERENCES Viestiketju(id));");
+//        
+//        lista.add("DROP TABLE Aihealue; DROP TABLE Viestiketju; DROP TABLE Viesti;");
+//        lista.add("CREATE TABLE Aihealue (id INTEGER PRIMARY KEY, aiheenNimi varchar(100));");
+//        lista.add("CREATE TABLE Viestiketju (id INTEGER PRIMARY KEY, aihealue INTEGER, "
+//                + "nimi VARCHAR(100), aika TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP, "
+//                + "FOREIGN KEY (aihealue) REFERENCES Aihealue(id));");
+//        lista.add("CREATE TABLE Viesti (id INTEGER PRIMARY KEY, viestiketju INTEGER,"
+//                + "teksti varchar(500), lahettaja VARCHAR(50), lahetysaika TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,"
+//                + "otsikko VARCHAR(100), FOREIGN KEY (viestiketju) REFERENCES Viestiketju(id));");
 //         tietokantataulujen luomiseen tarvittavat komennot suoritusjärjestyksessä
 //        lista.add("DROP TABLE Aihealue; DROP TABLE Viestiketju; DROP TABLE Viesti;");
 //        lista.add("CREATE TABLE Aihealue (id INTEGER PRIMARY KEY, aiheenNimi VARCHAR(100));");
