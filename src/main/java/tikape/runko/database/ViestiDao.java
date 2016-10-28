@@ -70,8 +70,9 @@ public class ViestiDao implements Dao<Viesti, Integer> {
 
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viesti"
-                + " WHERE Viesti.teksti LIKE '%" + hakusana + "%' OR Viesti.otsikko LIKE '%"
-                + "" + hakusana + "%'" );
+                + " WHERE Viesti.teksti LIKE '%?%' OR Viesti.otsikko LIKE '%?%'" );
+        stmt.setObject(1, hakusana);
+        stmt.setObject(2, hakusana);
 
         ResultSet rs = stmt.executeQuery();
         List<Viesti> viestit = new ArrayList<>();
