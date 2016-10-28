@@ -61,10 +61,11 @@ public class Database {
     
     private List<String> postgreLauseet() {
         ArrayList<String> lista = new ArrayList<>();
-
-        // tietokantataulujen luomiseen tarvittavat komennot suoritusjärjestyksessä
+        
+        lista.add("SET TIME_ZONE = '+02:00'");
+        
+        
         lista.add("DROP TABLE Aihealue; DROP TABLE Viestiketju; DROP TABLE Viesti");
-        // heroku käyttää SERIAL-avainsanaa uuden tunnuksen automaattiseen luomiseen
         lista.add("CREATE TABLE Aihealue (id SERIAL PRIMARY KEY, aiheenNimi varchar(100));");
         lista.add("CREATE TABLE Viestiketju (id SERIAL PRIMARY KEY, aihealue INTEGER,"
                 + "nimi VARCHAR(100), aika TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,"
