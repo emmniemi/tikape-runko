@@ -1,7 +1,5 @@
 package tikape.runko.domain;
 
-import java.sql.Timestamp;
-
 public class Viesti {
 
     private Integer id;
