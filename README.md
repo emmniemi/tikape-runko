@@ -1,4 +1,4 @@
-# tikape-runko
+# Keskustelufoorumi
 
-Tietokantojen perusteet -kurssilla tehtävän web-sovelluksen pohja.
+Tietokantojen perusteet -kurssin harjoitustyönä tehty keskutelufoorumi.
 
